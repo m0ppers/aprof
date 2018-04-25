@@ -7,7 +7,7 @@ Update for version 3.20.
 
 (From Aminet Readme)
 
-## Dislaimer
+## Disclaimer
 
 This is not my work. This is a fork from here:
 

@@ -34,6 +34,7 @@
 #include "dsp.h"
 #include "p3text.h"
 
+ULONG __oslibversion=36;
 
 #define MIN_VERSION     37  /* 2.04 */
 #define MIN_REXX_VER    36
@@ -551,8 +552,6 @@ void pro_debug( void )
 }
 #endif
 #endif
-
-
 
 int main( int argc, char *argv[] )
 {

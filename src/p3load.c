@@ -1,11 +1,11 @@
 /*
  * $RCSfile: p3load.c,v $
  *
- * Laderoutinen für Profiler - Compilerunabhängiges Lesen von Symbolhunks
+ * Laderoutinen fï¿½r Profiler - Compilerunabhï¿½ngiges Lesen von Symbolhunks
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:42 $
  *
- * ©1993,94 Michael G. Binz
+ * ï¿½1993,94 Michael G. Binz
  */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 #include <dos/dos.h>
 #include <clib/dos_protos.h>
 
-#include <pragmas/dos_lib.h>
+#include <pragma/dos_lib.h>
 
 #include "dsp.h"
 #include "version.h"
@@ -74,7 +74,7 @@ static void ProFree( void )
 
 
 
-// Makros für Hunkzugriffe
+// Makros fï¿½r Hunkzugriffe
 #define HunkSize( hunkbase )      (*(((ULONG *)BADDR( hunkbase ))-1)-8)
 #define HunkNext( hunkbase )      (*(BPTR *)BADDR( hunkbase ))
 #define HunkBase( hunkbase )      ((ULONG)(((ULONG *)BADDR( hunkbase ))+1))
@@ -161,7 +161,7 @@ static void AdrSortSymList( void )
       for ( Snoop = Source ; Snoop && (Snoop->s_hunk == hunknum) ; Snoop = Snoop->s_next )
          FSnoop = Snoop, ++symnum;
 
-      // Listenteil abhängen
+      // Listenteil abhï¿½ngen
       Hunk = Source;
       Source = Snoop;
       FSnoop->s_next = NULL;
@@ -200,7 +200,7 @@ static void AdrSortSymList( void )
 /* OptSymList
  *
  * Entfernung von Adresskollisionen innerhalb eines Hunk.
- * Symboltabelle muß aufsteigend geordnet sein
+ * Symboltabelle muï¿½ aufsteigend geordnet sein
  */
 static void OptSymList( void )
 {
@@ -209,15 +209,15 @@ static void OptSymList( void )
    good = bad = NULL;
    src = THE_BASE.pb_symlist;
 
-   /* Rückkehr, falls keine Symbolliste existiert
+   /* Rï¿½ckkehr, falls keine Symbolliste existiert
     */
    if ( !src )
       return;
 
    /* Aufteilen der Symbolliste (src) in zwei neue
     * Listen (good, bad), wobei good die weiterhin
-    * gültigen Symbole und bad Doppeleinträge
-    * enthält.
+    * gï¿½ltigen Symbole und bad Doppeleintrï¿½ge
+    * enthï¿½lt.
     */
    while ( src )
    {
@@ -241,7 +241,7 @@ static void OptSymList( void )
    }
 
    /* Good wird die neue Symbolliste, Bad wird freigegeben,
-    * wenn Einträge existieren.
+    * wenn Eintrï¿½ge existieren.
     */
    THE_BASE.pb_symlist = good;
 
@@ -291,7 +291,7 @@ static BOOL CreatSymlist( char *exe )
       {
          struct Symbol  *sy;
 
-         // Außerhalb des Hunks?
+         // Auï¿½erhalb des Hunks?
          if ( si->si_radr >= si->si_hunksize )
             continue;
 
@@ -404,7 +404,7 @@ void LoadExecutable( char *exen )
    SetExecutableName( exen );
    THE_BASE.pb_base_time = 0;
 
-   // Anzeige über dsp
+   // Anzeige ï¿½ber dsp
    ShowSymbolList();
    sprintf( title, APP_NAME ": %s", exen );
    DspSetWindowTitle( title );
@@ -433,27 +433,27 @@ void men_open( void  )
    if ( file = RequestFilenameR() )
       LoadExecutable( file );
 
-   // Gesamtausführungszeit löschen
+   // Gesamtausfï¿½hrungszeit lï¿½schen
    UpdateXTime( NULL );
 }
 
 
 
-// Aufgelaufene Zeitwerte auf 0 setzen (File/reset im Menü)
+// Aufgelaufene Zeitwerte auf 0 setzen (File/reset im Menï¿½)
 void men_reset( void )
 {
    struct Symbol *s;
 
    if ( THE_BASE.pb_symlist )
    {
-      // Liste rücksetzen
+      // Liste rï¿½cksetzen
       for ( s = THE_BASE.pb_symlist ; s ; s = s->s_next )
          s->s_xcount = s->s_xtim_inc = s->s_xtim_min = s->s_xtim_max = 0;
 
-      // Gesamtlaufzeit rücksetzen
+      // Gesamtlaufzeit rï¿½cksetzen
       THE_BASE.pb_base_time = 0;
 
-      // Anzeige der Gesamtausführungszeit löschen
+      // Anzeige der Gesamtausfï¿½hrungszeit lï¿½schen
       UpdateXTime( NULL );
 
       // Liste mit neuen Werten darstellen
@@ -466,13 +466,13 @@ void men_reset( void )
 
 
 
-// TODO: Es sollte binäre Suche verwendet werden!
+// TODO: Es sollte binï¿½re Suche verwendet werden!
 //       Schliesslich laufen wir im Supervisor Mode
 
 static ULONG SaveTable[256][2];
 
 
-// Hier wird die Tabelle erzeugt, die das Save Profiling ermöglicht.
+// Hier wird die Tabelle erzeugt, die das Save Profiling ermï¿½glicht.
 ULONG **CreateSaveTable( void )
 {
    USHORT MaxHunk = 0, i;
@@ -488,7 +488,7 @@ ULONG **CreateSaveTable( void )
          MaxHunk = sp->s_hunk;
    }
 
-   // Platz für Endemarkierung
+   // Platz fï¿½r Endemarkierung
    MaxHunk++;
 
    // Alle vorkommenden Hunks markieren
@@ -511,7 +511,7 @@ ULONG **CreateSaveTable( void )
       }
    }
 
-   // Optimieren - d.h. Hunks mit Grösse 0 werden entfernt
+   // Optimieren - d.h. Hunks mit Grï¿½sse 0 werden entfernt
    for ( i = 0 ; i < MaxHunk ; i++ )
    {
       if ( 0 == SaveTable[i][1] )
@@ -541,7 +541,7 @@ void FreeSaveTable( void )
 
 
 
-/* Funktion läuft im Supervisor Mode
+/* Funktion lï¿½uft im Supervisor Mode
  */
 BOOL IsCodeHit( ULONG ret )
 {
@@ -558,7 +558,7 @@ BOOL IsCodeHit( ULONG ret )
          return TRUE;
    }
 
-   // Sollte es nötig sein, kann hier noch an der Position ~adr-2
+   // Sollte es nï¿½tig sein, kann hier noch an der Position ~adr-2
    // nach einem jsr oder jmp gesucht werden.
 #if 0
 

@@ -5,15 +5,15 @@
  *
  * $Revision: 1.2 $ $Date: 2008/03/25 20:40:24 $
  *
- * Copyright © 1994 Michael G. Binz
+ * Copyright ï¿½ 1994 Michael G. Binz
  */
 
 #include <exec/libraries.h>
 #include <dos/dos.h>
 #include <clib/exec_protos.h>
 #include <clib/dos_protos.h>
-#include <pragmas/exec_lib.h>
-#include <pragmas/dos_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/dos_lib.h>
 
 
 

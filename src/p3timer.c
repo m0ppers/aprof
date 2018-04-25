@@ -1,15 +1,15 @@
 /*
  * $RCSfile: p3timer.c,v $
  *
- * Handle-Modul für CIA-Timer
+ * Handle-Modul fï¿½r CIA-Timer
  *
- * Koppeln von Timer A & B zu einem 32-Bit-Zähler
- * Zählfrequenz auf E-Takt einstellen (716 kHz = 1/10 ProTakt)
+ * Koppeln von Timer A & B zu einem 32-Bit-Zï¿½hler
+ * Zï¿½hlfrequenz auf E-Takt einstellen (716 kHz = 1/10 ProTakt)
  * CIA(B)
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:51 $
  *
- * © 1991-94 Michael G. Binz
+ * ï¿½ 1991-94 Michael G. Binz
  */
 
 
@@ -24,7 +24,7 @@
 #include <hardware/cia.h>
 #include <clib/cia_protos.h>
 
-#include <pragmas/exec_lib.h>
+#include <pragma/exec_lib.h>
 
 #include "timer.h"
 
@@ -39,7 +39,7 @@ extern struct ExecBase *SysBase;
  */
 static ULONG task_switches;
 
-/* Fehlmessung für Aufruf von StartTimeMark und StopTimeMark
+/* Fehlmessung fï¿½r Aufruf von StartTimeMark und StopTimeMark
  */
 static ULONG StartStopMeaError;      
 
@@ -49,12 +49,12 @@ static struct Interrupt CIATimerInt;
 
 
 /* Flags */
-static BOOL running = FALSE;        // TRUE = Timer läuft
+static BOOL running = FALSE;        // TRUE = Timer lï¿½uft
 static BOOL init = FALSE;           // TRUE = Timer initialisiert
 BOOL timer_err = FALSE;             // TRUE, falls Fehler aufgetreten
 
 
-/* Typ für Umwandlung CIA-Register -> 32 Bit */
+/* Typ fï¿½r Umwandlung CIA-Register -> 32 Bit */
 union Reg2Long
 {
    ULONG longval;
@@ -71,7 +71,7 @@ static void execStopTimerCIA(void);
 
 /* TimeOver
  *
- * Routine wird bei Timeroverflow als Interrupt ausgeführt
+ * Routine wird bei Timeroverflow als Interrupt ausgefï¿½hrt
  */
 static void TimeOver()
 {
@@ -113,7 +113,7 @@ static void execStopTimerCIA()
  *
  * Auslesen des Timers in CIA-B
  *
- * Rückgabe: Aktueller Stand des Timers
+ * Rï¿½ckgabe: Aktueller Stand des Timers
  *
  */
 
@@ -133,7 +133,7 @@ ULONG RawTimeCIA( void )
 
 /* SetTimerCIA
  *
- * Rücksetzen des Timers auf Startwert
+ * Rï¿½cksetzen des Timers auf Startwert
  *
  * Eingabe: Startwert
  */
@@ -155,7 +155,7 @@ static void SetTimerCIA( ULONG val )
  *
  * Starten des Timers
  *
- * Rückgabe: keine
+ * Rï¿½ckgabe: keine
  *
  */
 void StartTimerCIA( void )
@@ -170,7 +170,7 @@ void StartTimerCIA( void )
  *
  * Anhalten des Timers
  *
- * Rückgabe: 0 = standard
+ * Rï¿½ckgabe: 0 = standard
  *           1 = dto.
  */
 void StopTimerCIA( void )
@@ -200,7 +200,7 @@ ULONG StartTimeMarkCIA( void )
  *
  * Zeitnahme beenden
  *
- * Rückgabe: Seit letztem StartTimeMarkCIA vergangene Ticks
+ * Rï¿½ckgabe: Seit letztem StartTimeMarkCIA vergangene Ticks
  */
 ULONG StopTimeMarkCIA( ULONG time )
 {
@@ -213,7 +213,7 @@ ULONG StopTimeMarkCIA( ULONG time )
  *
  * Abschalten der Timer in CIA-B
  *
- * Rückgabe: Anzahl der Taskswitches zwischen InitTimer und ExitTimer
+ * Rï¿½ckgabe: Anzahl der Taskswitches zwischen InitTimer und ExitTimer
  */
 ULONG ExitTimerCIA( void )
 {
@@ -247,9 +247,9 @@ ULONG ExitTimerCIA( void )
 /* InitTimerCIA
  *
  * Komplette Initialisierung der Timer in CIA-B.
- * Koppeln zu 32 Bit-Zähler, Zählfrequenz E-Takt 716 Hz einstellen
+ * Koppeln zu 32 Bit-Zï¿½hler, Zï¿½hlfrequenz E-Takt 716 Hz einstellen
  *
- * Rückgabe: 0 = Timer nicht verfügbar
+ * Rï¿½ckgabe: 0 = Timer nicht verfï¿½gbar
  *           1 = Timer initialisiert
  */
 BOOL InitTimerCIA( void )
@@ -258,9 +258,9 @@ BOOL InitTimerCIA( void )
 
    /* Kontrolle der Startbits in CRA & CRB */
    if ( (ciab.ciacra & CIACRAF_START) || (ciab.ciacrb & CIACRBF_START) )
-      return FALSE;                    // => Timer nicht verfügbar
+      return FALSE;                    // => Timer nicht verfï¿½gbar
 
-   /* Öffnen der Ressource */
+   /* ï¿½ffnen der Ressource */
    if ( (CIAResource = (struct Library *)OpenResource( CIABNAME )) == NULL )
       return FALSE;
 
@@ -273,7 +273,7 @@ BOOL InitTimerCIA( void )
    if ( AddICRVector( CIAResource, CIAICRB_TB, &CIATimerInt ) )
       return FALSE;
 
-   /* Switch und Launch Funktionen in Prozeßstruktur installieren */
+   /* Switch und Launch Funktionen in Prozeï¿½struktur installieren */
    Disable();
       pro = (struct Process *)FindTask( NULL );
       pro->pr_Task.tc_Switch = execStopTimerCIA;
@@ -281,25 +281,25 @@ BOOL InitTimerCIA( void )
       pro->pr_Task.tc_Flags |= ( TF_SWITCH | TF_LAUNCH );
    Enable();
 
-   /* Zählfrequenz Timer A auf E-Takt stellen (ca. 716 kHz)          */
-   ciab.ciacra &= ~CIACRAF_INMODE;       /* %1101 1111 > löschen     */
+   /* Zï¿½hlfrequenz Timer A auf E-Takt stellen (ca. 716 kHz)          */
+   ciab.ciacra &= ~CIACRAF_INMODE;       /* %1101 1111 > lï¿½schen     */
 
    /* Timer B an Unterlauf Timer A koppeln */
    ciab.ciacrb &= ~(CIACRBF_INMODE0|CIACRBF_INMODE1);
    ciab.ciacrb |= CIACRBF_IN_TA;
 
    /* RUNMODE = continous */
-   ciab.ciacra &= ~CIACRAF_RUNMODE;      /* löschen  */
+   ciab.ciacra &= ~CIACRAF_RUNMODE;      /* lï¿½schen  */
    ciab.ciacrb |=  CIACRBF_RUNMODE;      /* setzen   */
 
-   /* Startwerte der Zähler initialisieren (0xffffffff) */
+   /* Startwerte der Zï¿½hler initialisieren (0xffffffff) */
    SetTimerCIA( (ULONG)-1 );
 
    /* Interne Init-Markierung setzen */
    init = TRUE;
    task_switches = 0;
 
-   // Fehlerflag zurücksetzen
+   // Fehlerflag zurï¿½cksetzen
    timer_err = FALSE;
 
    return TRUE;

@@ -5,7 +5,7 @@
  *
  * $Revision: 1.2 $ $Date: 2008/04/10 18:41:20 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <stdlib.h>
@@ -14,8 +14,8 @@
 #include <libraries/amigaguide.h>
 #include <clib/amigaguide_protos.h>
 #include <clib/dos_protos.h>
-#include <pragmas/amigaguide_lib.h>
-#include <pragmas/dos_lib.h>
+#include <pragma/amigaguide_lib.h>
+#include <pragma/dos_lib.h>
 
 #include "dsp.h"
 #include "pro.h"

@@ -6,16 +6,16 @@
  * $Id: seg.cpp,v 1.1.1.1 2002/05/31 23:15:59 michab66 Exp $ 
  * $Revision: 1.1.1.1 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 
 #include <iostream.h>
-#include <pragmas/dos_lib.h>
+#include <pragma/dos_lib.h>
 
 
 
-// Kein zurück...
+// Kein zurï¿½ck...
 
 void usage()
 {

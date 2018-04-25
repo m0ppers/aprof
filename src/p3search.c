@@ -1,11 +1,11 @@
 /*
  * $RCSfile: p3search.c,v $
  *
- * Suchsystem für Profile3
+ * Suchsystem fï¿½r Profile3
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:48 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <string.h>
@@ -15,9 +15,9 @@
 #include <clib/intuition_protos.h>
 #include <clib/exec_protos.h>
 
-#include <pragmas/gadtools_lib.h>
-#include <pragmas/intuition_lib.h>
-#include <pragmas/exec_lib.h>
+#include <pragma/gadtools_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/exec_lib.h>
 
 #include "version.h"
 #include "dsp.h"	
@@ -32,10 +32,10 @@
 
 
 /*
- * Definition der Benutzeroberfläche
+ * Definition der Benutzeroberflï¿½che
  */
 
-// Breite des Fensters (Höhe wird berechnet)
+// Breite des Fensters (Hï¿½he wird berechnet)
 #define SR_WIN_WI			340
 
 enum { GD_STRING, GD_CASE, GD_USE, GD_CANCEL } DlgSearchIdx;
@@ -56,13 +56,13 @@ static struct NewGadget DlgSearch[] = {
  * Statusvariablen des Moduls
  */
 
-// Suchstring (muß bei Programmende freigegeben werden)
+// Suchstring (muï¿½ bei Programmende freigegeben werden)
 static char *pszSearch;
 // Startzeile der Suche
 static int  fd_lin;
 // Startspalte der Suche
 static int  fd_col;
-// Groß/Kleinschreibung beachten?
+// Groï¿½/Kleinschreibung beachten?
 static BOOL case_sensitive = FALSE;
 
 
@@ -71,7 +71,7 @@ static BOOL case_sensitive = FALSE;
 
 /*
  *
- * Moduldestruktor für p3search.c
+ * Moduldestruktor fï¿½r p3search.c
  *
  */ 
 static void FreeSearch( void )
@@ -96,7 +96,7 @@ static void SetSearchString( char *s )
    // Letzten Suchstring freigeben
    FreeSearch();
    
-   // Neuen einhängen
+   // Neuen einhï¿½ngen
    if ( s && *s )
       pszSearch = stralloc( s );
 }
@@ -107,7 +107,7 @@ static void SetSearchString( char *s )
 
 /* DlgSearchLayout
  *
- * Gadgetpositionen und -höhen werden berechnet
+ * Gadgetpositionen und -hï¿½hen werden berechnet
  */
 static ULONG DlgSearchLayout( struct NewGadget *gl )
 {
@@ -118,8 +118,8 @@ static ULONG DlgSearchLayout( struct NewGadget *gl )
    WORD crColmP;   // Aktuelle Spaltenposition (Pixels)
    ULONG GadHi;
 
-   /* Berechnung der Gadgethöhe in Abhängigkeit vom default font 
-    * (1.5 * Zeilenhöhe)
+   /* Berechnung der Gadgethï¿½he in Abhï¿½ngigkeit vom default font 
+    * (1.5 * Zeilenhï¿½he)
     */
    GadHi = DspGetFont()->ta_YSize + (DspGetFont()->ta_YSize>>1);
 
@@ -201,7 +201,7 @@ static BOOL app_dispatch_search( struct Window *w, struct Gadget *sgad, struct G
 
 
 
-// slin - Startzeile für Suche [1-...[
+// slin - Startzeile fï¿½r Suche [1-...[
 
 // TODO: Diese Funktion sollte mal neu implementiert werden...
 
@@ -283,7 +283,7 @@ void app_find( void )
 
    if ( gad )
    {
-      // Parent Window für Position
+      // Parent Window fï¿½r Position
       struct Window *pw = DspGetWindow();
       
       struct Window *w = OpenWindowTags( NULL,
@@ -311,7 +311,7 @@ void app_find( void )
       }
    }
 
-   FreeGadgets( glist );       // Muß immer durchlaufen werden!! (gad == NULL)
+   FreeGadgets( glist );       // Muï¿½ immer durchlaufen werden!! (gad == NULL)
 
    if ( DoSearch && pszSearch && *pszSearch )             // Start der Suche
       app_search( pszSearch, DspGetCurrentLine(), 0 );

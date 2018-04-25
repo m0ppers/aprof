@@ -5,7 +5,7 @@
  *
  * $Revision: 1.2 $ $Date: 2008/04/10 18:33:24 $
  *
- * Copyright © 1992-94 Michael G. Binz
+ * Copyright ï¿½ 1992-94 Michael G. Binz
  */
 
 #include <stdio.h>
@@ -18,10 +18,10 @@
 #include <clib/gadtools_protos.h>
 #include <clib/intuition_protos.h>
 
-#include <pragmas/exec_lib.h>
-#include <pragmas/dos_lib.h>
-#include <pragmas/gadtools_lib.h>
-#include <pragmas/intuition_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/dos_lib.h>
+#include <pragma/gadtools_lib.h>
+#include <pragma/intuition_lib.h>
 
 #include "version.h"
 #include "dsp.h"
@@ -61,7 +61,7 @@ enum
 
 // Definition of the Gadgets in the Exec (Data) dialog.
 
-/* Vergiss es! Ab Rev. 1.2 nochmal geändert! In Zukunft muss das so laufen
+/* Vergiss es! Ab Rev. 1.2 nochmal geï¿½ndert! In Zukunft muss das so laufen
  * wie in p3prefs.c!
  * Achtung: Wieder neue Logik. Wenn ng_UserData ungleich Null ist, dann ist dieses
  * Gadget ein Endgadget. Der (Boolesche) Returnwert ergibt sich aus ng_UserData>>1
@@ -256,7 +256,7 @@ void men_execopt( void )
       }
    }
 
-   FreeGadgets( glist );       // Muß immer durchlaufen werden!! (gad == NULL)
+   FreeGadgets( glist );       // Muï¿½ immer durchlaufen werden!! (gad == NULL)
 }
 
 

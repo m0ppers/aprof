@@ -1,11 +1,11 @@
 /**************************************************************************
  * $RCSfile: p3gui.c,v $
  *
- * Gadgetdefinitionen für das Hauptfenster
+ * Gadgetdefinitionen fï¿½r das Hauptfenster
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:40 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <stdlib.h>
@@ -16,9 +16,9 @@
 #include <clib/intuition_protos.h>
 #include <clib/graphics_protos.h>
 
-#include <pragmas/gadtools_lib.h>
-#include <pragmas/intuition_lib.h>
-#include <pragmas/graphics_lib.h>
+#include <pragma/gadtools_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/graphics_lib.h>
 
 #include "dsp.h"
 #include "pro.h"
@@ -33,7 +33,7 @@ static struct TextAttr DefaultTxA;
 
 // In UserID ist die Zeile codiert, in der das Gadget erscheinen soll
 // UserID = 0 => Ende der Liste
-// Die folgenden enum-Definitionen müssen parallel zur Liste laufen!
+// Die folgenden enum-Definitionen mï¿½ssen parallel zur Liste laufen!
 
 enum gads { gd_mode=0, gd_units, gd_sort, gd_xtime, gd_leiste, gd_header=11 };
 
@@ -62,10 +62,10 @@ static struct NewGadget p3gads[] = {
 };
 
 
-// Hilfsvariable für Aufbau und abschließende Freigabe der Gadgetliste
+// Hilfsvariable fï¿½r Aufbau und abschlieï¿½ende Freigabe der Gadgetliste
 static struct Gadget *glist;
 
-// Zeiger auf Gadgets, die für SetAttr() benötigt werden
+// Zeiger auf Gadgets, die fï¿½r SetAttr() benï¿½tigt werden
 static struct Gadget *gp_xtime, *gp_mode, *gp_unit, *gp_sort;
 
 
@@ -83,7 +83,7 @@ static void CalculateGadgetLayout( struct Window *win, APTR visual, struct NewGa
    // TextAttr vom Default font holen
    AskFont( win->RPort, &DefaultTxA );
 
-   // Berechnung der Gadgethöhe in Abhängigkeit vom default font (1.5 * Zeilenhöhe)
+   // Berechnung der Gadgethï¿½he in Abhï¿½ngigkeit vom default font (1.5 * Zeilenhï¿½he)
    GadHi = DefaultTxA.ta_YSize + (DefaultTxA.ta_YSize>>1);
 
    for ( prLineN = 0, crLineN = gl->ng_GadgetID ; crLineN ; crLineN = (++gl)->ng_GadgetID )
@@ -108,10 +108,10 @@ static void CalculateGadgetLayout( struct Window *win, APTR visual, struct NewGa
       gl->ng_VisualInfo = visual;
    }
 
-   // Anzeigebereich des Console.device einschränken
+   // Anzeigebereich des Console.device einschrï¿½nken
    DspSetTopOffset( crLineP + GadHi );
 
-   /* Minimale Fensterhöhe so einstellen, daß immer die
+   /* Minimale Fensterhï¿½he so einstellen, daï¿½ immer die
     * ersten Zeilen der Tabelle sichtbar bleiben
     */
    WindowLimits( DspGetWindow(), 0, crLineP + 4*GadHi, 0, 0 );

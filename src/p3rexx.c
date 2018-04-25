@@ -1,13 +1,13 @@
 /*
  * $RCSfile: p3rexx.c,v $
  *
- * AProf Interface für Rexx Unmangler
+ * AProf Interface fï¿½r Rexx Unmangler
  *
- * >> Modul kann mit Aztec und Maxon übersetzt werden <<
+ * >> Modul kann mit Aztec und Maxon ï¿½bersetzt werden <<
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:47 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <stdio.h>
@@ -20,18 +20,18 @@
 #include <rexx/errors.h>
 #include <clib/exec_protos.h>
 #include <clib/rexxsyslib_protos.h>
-#include <pragmas/exec_lib.h>
-#include <pragmas/rexxsyslib_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/rexxsyslib_lib.h>
 
 #include "pro.h"
 
 
 
 /*
- * RexxSysBase muß bereits geöffnet sein
+ * RexxSysBase muï¿½ bereits geï¿½ffnet sein
  */
 
-// Suffix für Rexx Unmangler
+// Suffix fï¿½r Rexx Unmangler
 #define SUFFIX      "aprof"
 
 // Puffer
@@ -81,7 +81,7 @@ BOOL RexxInit( void )
 /*
  * Sendet eine Message an den Rexx Host Prozess
  *
- * Rückgabe: FALSE = Rexx Port nicht gefunden
+ * Rï¿½ckgabe: FALSE = Rexx Port nicht gefunden
  *           TRUE    Sonst
  */
 static BOOL SendRexxMsg( struct RexxMsg *rm )
@@ -112,7 +112,7 @@ static void PrintRexxError( LONG err1, LONG err2 )
 {
    // Rexx Message erstellen
    struct RexxMsg *rm;
-   // Übergabe
+   // ï¿½bergabe
    UBYTE *arg0;
 
    if ( rm  = CreateRexxMsg( rxReply, NULL, __FILE__ ) )
@@ -128,7 +128,7 @@ static void PrintRexxError( LONG err1, LONG err2 )
 
          if ( WaitPort( rxReply ) )
          {
-            // Rückgabe in Empfang nehmen
+            // Rï¿½ckgabe in Empfang nehmen
             struct RexxMsg *returned = (struct RexxMsg *)GetMsg( rxReply );
 
             // Auswertung der Ergebnisse
@@ -136,9 +136,9 @@ static void PrintRexxError( LONG err1, LONG err2 )
                p3err( "ARexx internal error" );
             else
             {
-               // Ergebnis übernehmen
+               // Ergebnis ï¿½bernehmen
                p3err( "ARexx error %d/%d: %s", err2, err1, (char *)rm->rm_Result2 );
-               // Übergabestruktur freigeben
+               // ï¿½bergabestruktur freigeben
                DeleteArgstring( (UBYTE *)rm->rm_Result2 );
             }
          }
@@ -155,11 +155,11 @@ static void PrintRexxError( LONG err1, LONG err2 )
 
 
 /*
- * Diese Funktion stellt für AProf den Unmangler dar
+ * Diese Funktion stellt fï¿½r AProf den Unmangler dar
  *
- * symbol:   Zeiger auf ein symbol in C++ (o.ä.) Notation
+ * symbol:   Zeiger auf ein symbol in C++ (o.ï¿½.) Notation
  *
- * Rückgabe: Verwurschtetes symbol
+ * Rï¿½ckgabe: Verwurschtetes symbol
  */
 char *RexxUnmangle( char *symbol )
 {
@@ -168,40 +168,40 @@ char *RexxUnmangle( char *symbol )
 
    if ( rm )
    {
-      // Übergabewert
+      // ï¿½bergabewert
       UBYTE *arg1 = CreateArgstring( symbol, strlen( symbol ) );
 
       // Actionscode, Ergebnisanforderung, Argumentenzahl
       rm->rm_Action = RXFUNC | RXFF_RESULT | 1; // 1 Argument
 
-      // Argumente in Message einhängen
+      // Argumente in Message einhï¿½ngen
       ARG0( rm ) = rxFunc;
       ARG1( rm ) = arg1;
 
       // Message senden
       SendRexxMsg( rm );
 
-      // Auf Antwort warten (Leider ist während dem Warten nichts zu tun)
+      // Auf Antwort warten (Leider ist wï¿½hrend dem Warten nichts zu tun)
       if ( WaitPort( rxReply ) )
       {
-         // Rückgabe in Empfang nehmen
+         // Rï¿½ckgabe in Empfang nehmen
          struct RexxMsg *returned = (struct RexxMsg *)GetMsg( rxReply );
 
          // Auswertung der Ergebnisse
          if ( rm->rm_Result1 )
          {
-            // Zurückschalten auf Standard Unmangler
+            // Zurï¿½ckschalten auf Standard Unmangler
             SetRexxFunc( NULL );
             // Fehler ausgeben
             PrintRexxError( rm->rm_Result1, rm->rm_Result2 );
-            // Symbol unverändert zurückgeben
+            // Symbol unverï¿½ndert zurï¿½ckgeben
             strcpy( rxBuffer, symbol );
          }
          else
          {
-            // Ergebnis übernehmen
+            // Ergebnis ï¿½bernehmen
             strcpy( rxBuffer, (char *)rm->rm_Result2 );
-            // Übergabestruktur freigeben
+            // ï¿½bergabestruktur freigeben
             DeleteArgstring( (UBYTE *)rm->rm_Result2 );
          }
       }
@@ -213,7 +213,7 @@ char *RexxUnmangle( char *symbol )
       DeleteRexxMsg( rm );
    }
 
-   // Ergebnis zurückgeben
+   // Ergebnis zurï¿½ckgeben
    return *rxBuffer ? rxBuffer : NULL;
 }
 
@@ -248,7 +248,7 @@ UBYTE *GetRexxFunc( void )
 
 
 /*
- * Rückgabe des für Rexx reservierten ToolTypes
+ * Rï¿½ckgabe des fï¿½r Rexx reservierten ToolTypes
  */
 char *GetRexxToolType( void )
 {

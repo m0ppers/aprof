@@ -5,7 +5,7 @@
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:37 $
  * 
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include <exec/tasks.h>
 #include <clib/exec_protos.h>
 #include <dos/dos.h>
-#include <pragmas/exec_lib.h>
+#include <pragma/exec_lib.h>
 
 #include "pro.h"
 #include "timer.h"
@@ -25,8 +25,8 @@ APTR OldTrap;
 static LONG      local_trap_tmp = -1;   // Trap #
 static LONG      local_trap_fix = -1;   // Trap #
 
-UWORD            trap_fix_cmd;      // Assemblercode für Kommando
-UWORD            trap_tmp_cmd;      // Assemblercode für Kommando
+UWORD            trap_fix_cmd;      // Assemblercode fï¿½r Kommando
+UWORD            trap_tmp_cmd;      // Assemblercode fï¿½r Kommando
 
 #define TRAP_FRAME   0x4e40
 
@@ -34,7 +34,7 @@ static union BreakPoint *breaktable[HASHSIZE];
 
 
 
-// Entfernt alle in breaktable eingehängten Daten aus dem Speicher 
+// Entfernt alle in breaktable eingehï¿½ngten Daten aus dem Speicher 
 static void BreakClear( void )
 {
    unsigned i;
@@ -121,7 +121,7 @@ static BOOL SetTraps( void )
    trap_fix_cmd = TRAP_FRAME | local_trap_fix;
    trap_tmp_cmd = TRAP_FRAME | local_trap_tmp;
    
-   // Übergabe der allokierten Traps an p3trap.asm
+   // ï¿½bergabe der allokierten Traps an p3trap.asm
    InitTrapHandler( local_trap_fix, local_trap_tmp );
    
    // Neuen TrapHandler aktivieren
@@ -163,11 +163,11 @@ static union BreakPoint *BreakCreate( ULONG adr )
  *
  * Sucht nach Breakpoint an Programmeintritt. Wenn keiner vorhanden
  * ist, wird Symbol '*ENTRY*' generiert und in die Symbolliste 
- * eingehängt.
- * Am Programmeintritt muß ein Symbol definiert sein, damit beim
+ * eingehï¿½ngt.
+ * Am Programmeintritt muï¿½ ein Symbol definiert sein, damit beim
  * Verlassen des Profilee mit exit() oder einem anderen nicht-lokalen
- * Sprung der Stack abgeräumt wird und nicht der Fall auftritt, daß eine
- * Funktion zwar einen Hitcount von 1 hat, aber keine Ausführungszeit
+ * Sprung der Stack abgerï¿½umt wird und nicht der Fall auftritt, daï¿½ eine
+ * Funktion zwar einen Hitcount von 1 hat, aber keine Ausfï¿½hrungszeit
  * bestimmt wurde.
  */
 static struct Symbol *CheckEntryBreak( struct Symbol *s, BPTR seg )
@@ -180,7 +180,7 @@ static struct Symbol *CheckEntryBreak( struct Symbol *s, BPTR seg )
    /* Berechnung des Programmeinsprungs */
    ULONG entry_adr = (ULONG)BADDR( seg + 1 );
 
-   /* Suchen eines Breakpoints für Programmeinsprung */
+   /* Suchen eines Breakpoints fï¿½r Programmeinsprung */
    for ( cs = s, count = 0 ; cs ; cs = cs->s_next )
    {
       if ( cs->s_cadr == entry_adr && !(cs->s_flags & S_HIDE) )
@@ -188,9 +188,9 @@ static struct Symbol *CheckEntryBreak( struct Symbol *s, BPTR seg )
    }
 
 
-   /* count muß im Bereich 0 <= count <= 2 liegen.
+   /* count muï¿½ im Bereich 0 <= count <= 2 liegen.
     *
-    * Bei count == 0 muß *ENTRY* eingefügt werden,
+    * Bei count == 0 muï¿½ *ENTRY* eingefï¿½gt werden,
     * bei count == 1 ist nichts zu tun,
     * bei count == 2 wird *ENTRY* entfernt
     */
@@ -269,17 +269,17 @@ BOOL BreakSet( void )
       if ( NULL == (sy->s_break = BreakCreate( sy->s_cadr )) )
          return FALSE;
       
-      // Rückbezug von BreakPoint auf Symbol erstellen
+      // Rï¿½ckbezug von BreakPoint auf Symbol erstellen
       sy->s_break->fix.bp_symbol = sy;
 
-      // Ursprünglichen Befehl sichern
+      // Ursprï¿½nglichen Befehl sichern
       sy->s_break->fix.bp_save   = *(USHORT *)sy->s_cadr;
       
       // Breakpoint setzen
       *(USHORT *)sy->s_cadr = trap_fix_cmd;
    }
 
-   // 68040 Unterstützung (I'm only dreaming...) Cache zurückschreiben
+   // 68040 Unterstï¿½tzung (I'm only dreaming...) Cache zurï¿½ckschreiben
    CacheClearU();
 
    return TRUE;
@@ -287,7 +287,7 @@ BOOL BreakSet( void )
 
 
 
-/* Macht aus der Adresse eines BreakPoints das dazugehörige Symbol
+/* Macht aus der Adresse eines BreakPoints das dazugehï¿½rige Symbol
  * ACHTUNG: Fehler werden nicht abgefangen
  */
 struct Symbol *Break2Symbol( ULONG adr )

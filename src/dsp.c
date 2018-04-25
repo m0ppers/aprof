@@ -5,7 +5,7 @@
  *
  * $Revision: 1.2 $ $Date: 2008/03/25 20:36:49 $
  *
- * Copyright © 1992-94 Michael G. Binz
+ * Copyright ï¿½ 1992-94 Michael G. Binz
  */
 
 
@@ -26,11 +26,11 @@
 #include <clib/alib_protos.h>
 #include <clib/gadtools_protos.h>
 #include <clib/graphics_protos.h>
-#include <pragmas/graphics_lib.h>
-#include <pragmas/exec_lib.h>
-#include <pragmas/intuition_lib.h>
-#include <pragmas/console_lib.h>
-#include <pragmas/gadtools_lib.h>
+#include <pragma/graphics_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/console_lib.h>
+#include <pragma/gadtools_lib.h>
 
 #include "dsp.h"
 

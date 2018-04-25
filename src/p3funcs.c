@@ -1,11 +1,11 @@
 /*
  * $RCSfile: p3funcs.c,v $
  *
- * Hilfsfunktionen für Profiler
+ * Hilfsfunktionen fï¿½r Profiler
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:40 $
  * 
- * © 1992-94 Michael G. Binz
+ * ï¿½ 1992-94 Michael G. Binz
  */
 
 
@@ -26,26 +26,26 @@
 #include <clib/gadtools_protos.h>
 #include <clib/dos_protos.h>
 
-#include <pragmas/intuition_lib.h>
-#include <pragmas/asl_lib.h>
-#include <pragmas/exec_lib.h>
-#include <pragmas/gadtools_lib.h>
-#include <pragmas/dos_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/asl_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/gadtools_lib.h>
+#include <pragma/dos_lib.h>
 
 #include "version.h"
 #include "dsp.h"
 #include "pro.h"
 
-#define STX_BUFFER      256     /* Größe für statische Pufferbereiche */
+#define STX_BUFFER      256     /* Grï¿½ï¿½e fï¿½r statische Pufferbereiche */
 
 static char buffer[ STX_BUFFER ];
-static char fname[ STX_BUFFER ];   /* Puffer für Dateinamen */
+static char fname[ STX_BUFFER ];   /* Puffer fï¿½r Dateinamen */
 
 
 #ifdef __MAXON__
 /* strnicmp
  *
- * Vergleich zweier Strings bis zur Länge n unabhängig von Gross- und
+ * Vergleich zweier Strings bis zur Lï¿½nge n unabhï¿½ngig von Gross- und
  * Kleinschreibung
  */
 int strnicmp( char *s1, char *s2, int n )
@@ -75,6 +75,9 @@ int strnicmp( char *s1, char *s2, int n )
       return -2;
 }
 
+
+#endif
+
 char *strstri( char *s1, char *s2 )
 {
     char *si1, *si2;    // Interne Stringzeiger
@@ -98,29 +101,26 @@ char *strstri( char *s1, char *s2 )
     return( si1 );
 }
 
-
-
 char *strins( char *s, int p, char *i )
 {
     size_t taill, movel;
 
     if ( !s || !i || p > strlen( s ) )      // Wenn p oder s NULL oder ...
-        return( NULL );                     // Position außerhalb
+        return( NULL );                     // Position auï¿½erhalb
 
     taill = strlen( &s[p] ) +1;             // Inkl. EOS
     movel = strlen ( i );                   // Ohne EOS
 
-    memmove( &s[p+movel], &s[p], taill );   // Bereiche überlappen
+    memmove( &s[p+movel], &s[p], taill );   // Bereiche ï¿½berlappen
     memcpy( &s[p], i, movel );
 
     return( s );
 }
 
-#endif
 
 
 #if 0
-// Diese Funktionen wurden wg. einem Bug im Maxon C++ qsort() eingeführt
+// Diese Funktionen wurden wg. einem Bug im Maxon C++ qsort() eingefï¿½hrt
 static void p3swap( void *v[], int i, int j )
 {
    void *tmp = v[i];
@@ -164,11 +164,11 @@ void p3qsort( void *k[], int l, int r,
 
       for (;;)
       {
-         // Solange von links die Elemente kleiner als Pivot sind, hochzählen
+         // Solange von links die Elemente kleiner als Pivot sind, hochzï¿½hlen
          while ( cmp( &k[i], &p ) < 0 )
             i++;
 
-         // Solange von rechts Elemente größer als Pivot sind, runterzählen
+         // Solange von rechts Elemente grï¿½ï¿½er als Pivot sind, runterzï¿½hlen
          while ( cmp( &k[j], &p ) > 0 )
             j--;
 
@@ -204,7 +204,7 @@ void p3qsort( void *k[], int l, int r,
             x++, y--;
          }
 
-         // x,y dürfen nicht kleiner respektive größer als i,j werden
+         // x,y dï¿½rfen nicht kleiner respektive grï¿½ï¿½er als i,j werden
          if ( y < j )
             j = y;
          if ( x > i )
@@ -256,7 +256,7 @@ void p3qsort( void *k[], int l, int r,
 
 
 /****************************************************************************
- * Table2Idx - Sucht String in einer Tabelle und gibt den Index zurück
+ * Table2Idx - Sucht String in einer Tabelle und gibt den Index zurï¿½ck
  */
 
 UWORD Table2Idx( char **table, char *str )
@@ -338,7 +338,7 @@ char *RequestFilenameR( void )
 
 
 /**************************************************************************
- * RequestFilenameW - holt Dateiname von User, Datei wird überschrieben
+ * RequestFilenameW - holt Dateiname von User, Datei wird ï¿½berschrieben
  *
  * Sonst wie RequestFilenameR
  */
@@ -394,7 +394,7 @@ static BOOL save_data( FILE *file )
       return FALSE;
 
    /*
-    * Die folgenden Stringkonstanten dürfen keine Tabs enthalten
+    * Die folgenden Stringkonstanten dï¿½rfen keine Tabs enthalten
     */
 
    // Anzeigeeinheit
@@ -448,7 +448,7 @@ static BOOL save_data( FILE *file )
 
 
 
-/* men_save - Sichert Ergebnisse eines Profile-Laufs [Menü] File/Save
+/* men_save - Sichert Ergebnisse eines Profile-Laufs [Menï¿½] File/Save
  *
  * Eingabe,Ausgabe: keine
  */
@@ -462,7 +462,7 @@ void men_save( void )
       // Dateinamen erstellen
       sprintf( buffer, "%s.pro", THE_BASE.pb_comname );
 
-      // Datei öffnen
+      // Datei ï¿½ffnen
       if ( outfile = fopen( buffer, "w" ) )
       {
          p3err( "Writing to file '%s'", buffer );
@@ -530,7 +530,7 @@ void men_print( void )
 
 
 
-/* pro_about - Gibt Versionsmeldung aus ([Menü] File/About)
+/* pro_about - Gibt Versionsmeldung aus ([Menï¿½] File/About)
  *
  * Eingabe: keine
  * Ausgabe; keine
@@ -548,7 +548,7 @@ void pro_about( void )
    es.es_Flags      = 0;
    es.es_Title      = APP_NAME " Information";
    es.es_TextFormat = "%s\n\n"
-                      "© 1993,94 Michael G. Binz\n\n"
+                      "ï¿½ 1993,94 Michael G. Binz\n\n"
                       "EMail: michab@informatik.fh-augsburg.de";
    es.es_GadgetFormat = "Cancel";
 

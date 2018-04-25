@@ -1,7 +1,7 @@
 /*************************************************************************
  * $RCSfile: p3prefs.c,v $
  *
- * Requester für Filepattern
+ * Requester fï¿½r Filepattern
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:46 $
  * 
@@ -17,17 +17,17 @@
 #include <clib/gadtools_protos.h>
 #include <clib/intuition_protos.h>
 
-#include <pragmas/intuition_lib.h>
-#include <pragmas/gadtools_lib.h>
-#include <pragmas/dos_lib.h>
-#include <pragmas/exec_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/gadtools_lib.h>
+#include <pragma/dos_lib.h>
+#include <pragma/exec_lib.h>
 
 #include "version.h"
 #include "dsp.h"
 #include "pro.h"
 
 
-// Verschlüsselung der zusätzlichen Gadget Information
+// Verschlï¿½sselung der zusï¿½tzlichen Gadget Information
 #define GadId( endg, line )   (((WORD)endg<<8)|line)
 #define GetEnd( id )          (id>>8)
 #define GetLine( id )         ((WORD)id & 0xff)
@@ -38,7 +38,7 @@
 // Dimensionen des Fensters
 #define SR_WIN_WI       455
 
-// Save wurde gewählt
+// Save wurde gewï¿½hlt
 static BOOL SaveToolTypes = FALSE;
 
 
@@ -59,7 +59,7 @@ static char *patt;
 static BOOL  safe;
 
 /*
- * Zugehörige Setter
+ * Zugehï¿½rige Setter
  */
 
 static void setMode( struct IntuiMessage *msg )
@@ -87,8 +87,8 @@ static void setSafe( struct IntuiMessage *msg )
 /*
  * Bedeutung von endGad:
  *      o EG_NUL      keine weitere Reaktion (standard)
- *      o EQ_QIT      Requester schließen, Daten nicht übernehmen
- *      o EQ_USE      Requester schließen, Daten an Anwendung liefern
+ *      o EQ_QIT      Requester schlieï¿½en, Daten nicht ï¿½bernehmen
+ *      o EQ_USE      Requester schlieï¿½en, Daten an Anwendung liefern
  */
 enum endGad { EG_NUL, EG_QIT, EG_USE };
 
@@ -103,11 +103,11 @@ enum gadIds { GD_PATT, GD_MODE, GD_DUMM,
 
 /*
  * DlgPattern[]:
- *  Dieses Array enthält Beschreibungen für alle verwendeten Gadgets. Die
+ *  Dieses Array enthï¿½lt Beschreibungen fï¿½r alle verwendeten Gadgets. Die
  *  einzelnen Felder sind in den RKM's dokumentiert.
  *  Das ID Feld wurde verwendet, um die Zeile (Text) und weitere Infos zur
  *  Reaktion auf Anwahl zu codieren.
- *  UserData enthält einen Methodenaufruf für das jeweilige Gadget (wenn
+ *  UserData enthï¿½lt einen Methodenaufruf fï¿½r das jeweilige Gadget (wenn
  *  einer vorhanden ist) oder NULL.
  */
 static struct NewGadget DlgPattern[] = {
@@ -140,7 +140,7 @@ static struct NewGadget DlgPattern[] = {
 
 
 /*
- * Berechnung der Gadget Positionen und -höhen
+ * Berechnung der Gadget Positionen und -hï¿½hen
  */
 static ULONG DlgPatternLayout( struct NewGadget *gl )
 {
@@ -151,7 +151,7 @@ static ULONG DlgPatternLayout( struct NewGadget *gl )
    WORD crColmP;   // Aktuelle Spaltenposition (Pixels)
    ULONG GadHi;
 
-   // Berechnung der Gadgethöhe in Abhängigkeit vom default font (1.25 * Zeilenhöhe)
+   // Berechnung der Gadgethï¿½he in Abhï¿½ngigkeit vom default font (1.25 * Zeilenhï¿½he)
    GadHi = DspGetFont()->ta_YSize + (DspGetFont()->ta_YSize>>1);
 
    for ( prLineN = 0, crLineN = GetLine( gl->ng_GadgetID )
@@ -178,7 +178,7 @@ static ULONG DlgPatternLayout( struct NewGadget *gl )
       gl->ng_VisualInfo = DspGetVisInfo();
    }
 
-   // Benötigte Fensterhöhe
+   // Benï¿½tigte Fensterhï¿½he
    return crLineP + GadHi + INTERWIDTH/2 + DspGetWindow()->WScreen->WBorBottom;
 }
 
@@ -264,13 +264,13 @@ void men_sympat( void )
    ULONG WinHi;
    struct Gadget *glist = NULL, *gad, *stgad, *rxgad;
 
-   // Temporäre Variablen initialisieren
+   // Temporï¿½re Variablen initialisieren
    mode = GetModeIdx();
    unit = GetEinheitIdx();
    sort = GetSortIdx();
    safe = GetSaveProf();
 
-   // Gadgetpositionen und -höhen berechnen
+   // Gadgetpositionen und -hï¿½hen berechnen
    WinHi = DlgPatternLayout( DlgPattern );
 
    gad = CreateContext( &glist );
@@ -324,7 +324,7 @@ void men_sympat( void )
 
    if ( gad )
    {
-      // Parent Window für Positionierung
+      // Parent Window fï¿½r Positionierung
       struct Window *pw = DspGetWindow();
 
       struct Window *w = OpenWindowTags( NULL,
@@ -354,7 +354,7 @@ void men_sympat( void )
 
          CloseWindow( w );
 
-         // Use wurde gewählt
+         // Use wurde gewï¿½hlt
          if ( pat )
          {
             if ( *pat == '\0' )
@@ -367,7 +367,7 @@ void men_sympat( void )
             SetSortIdx( sort );
             SetSaveProf( safe );
 
-            // Save wurde gewählt
+            // Save wurde gewï¿½hlt
             if ( SaveToolTypes )
             {
                WriteToolTypes( NULL );
@@ -384,7 +384,7 @@ void men_sympat( void )
       }
    }
 
-   FreeGadgets( glist );       // Muß immer durchlaufen werden!! (gad == NULL)
+   FreeGadgets( glist );       // Muï¿½ immer durchlaufen werden!! (gad == NULL)
 }
 
 

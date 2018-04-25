@@ -5,7 +5,7 @@
  *
  * $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:49 $
  *
- * © 1993,94 Michael G. Binz
+ * ï¿½ 1993,94 Michael G. Binz
  */
 
 #include <stdio.h>
@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include <clib/dos_protos.h>
-#include <pragmas/dos_lib.h>
+#include <pragma/dos_lib.h>
 
 #include "dsp.h"
 #include "timer.h"
@@ -32,7 +32,7 @@ static char   *sympats;            // Zeiger auf Symbolpattern wie eingegeben
 
 
 /*
- * Einhängen des neuen Pattern
+ * Einhï¿½ngen des neuen Pattern
  */
 void SetPattern( char *pat )
 {
@@ -68,7 +68,7 @@ void SetPattern( char *pat )
       pp = ps = NULL;
 
    /* Wenn wir hier angekommen sind, dann sind pp und ps
-    * mit gültigen Werten belegt
+    * mit gï¿½ltigen Werten belegt
     */
 
    /* Freigabe eines evtl. vorhandenen alten Patterns */
@@ -92,7 +92,7 @@ char *GetPattern( void )
 
 
 
-/* Auslesen des ToolType für Speicherung des Pattern
+/* Auslesen des ToolType fï¿½r Speicherung des Pattern
  */
 char *GetPatternToolType( void )
 {
@@ -122,10 +122,10 @@ static void p3symdisExit( void )
 
 
 /*******************
- * Die folgenden Funktionen gehören zum Sortiersystem
+ * Die folgenden Funktionen gehï¿½ren zum Sortiersystem
  */
 
-// Argumente für p3Cmp, nicht besser möglich
+// Argumente fï¿½r p3Cmp, nicht besser mï¿½glich
 static int srt_idx, srt_len;
 
 static int p3Cmp( char **s1, char **s2 )
@@ -150,11 +150,11 @@ static void p3Sort( int idx, int len, int (* sfunc)( char **, char ** ) )
       // TextDisplay desaktivieren
       DspPutText( NULL );
 
-      // Zählen der Zeilen
+      // Zï¿½hlen der Zeilen
       for ( i = 0 ; tab[i] ;  i++ )
          ;
 
-      // Argumente für p3Sort
+      // Argumente fï¿½r p3Sort
       srt_idx = idx, srt_len = len;
 
       // Sortieren
@@ -196,9 +196,9 @@ static void SortOver( void )
 
 
 /**************************************************************
- * Tabellenwerte & Datendefinitionen für Sortierung
+ * Tabellenwerte & Datendefinitionen fï¿½r Sortierung
  *
- * Alle Tabellen müssen parallel laufen
+ * Alle Tabellen mï¿½ssen parallel laufen
  */
 
 static char *sortStr[] = {
@@ -222,7 +222,7 @@ static void (* SortFuncTable[])( void ) = {
 static int SortIdx;
 
 /**********
- * Get und Set für Sortierung
+ * Get und Set fï¿½r Sortierung
  */
 void SetSortIdx( UWORD idx )
 {
@@ -247,7 +247,7 @@ char *GetSortToolType( void )
 
 
 /********************
- * Funktionsdefinitionen für Anzeigeeinheit
+ * Funktionsdefinitionen fï¿½r Anzeigeeinheit
  */
 
 // Tick2Ms wird von p3timer.c importiert
@@ -265,7 +265,7 @@ static double prc_time( ULONG tv )
 
 
 /**************************************************************
- * Tabellen & Datendefinitionen für Anzeigeeinheit
+ * Tabellen & Datendefinitionen fï¿½r Anzeigeeinheit
  *
  * Diese beiden Tabellen muessen parallel laufen!
  */
@@ -304,7 +304,7 @@ UWORD GetEinheitIdx( void )
 }
 
 
-// Für Anzeige der SliderGadgets
+// Fï¿½r Anzeige der SliderGadgets
 char **GetEinheitStringTable( void )
 {
    return prof_time_units;
@@ -314,7 +314,7 @@ char **GetEinheitStringTable( void )
 
 /* GetEinheitToolType
  *
- * Auslesen des ToolType für die eingestellte Einheit
+ * Auslesen des ToolType fï¿½r die eingestellte Einheit
  */
 char *GetEinheitToolType( void )
 {
@@ -324,7 +324,7 @@ char *GetEinheitToolType( void )
 
 
 /*************************************************************************
- * ClearSymList - Falls angezeigte Symbolliste vorhanden, dann löschen
+ * ClearSymList - Falls angezeigte Symbolliste vorhanden, dann lï¿½schen
  */
 static void ClearSymbolList( void )
 {
@@ -356,7 +356,7 @@ static char *StdUnmangle( char *symbol )
 
 
 /*************************************************************************
- * ShowSymbolList - Übergibt eine neue Symbolliste an dsp.o
+ * ShowSymbolList - ï¿½bergibt eine neue Symbolliste an dsp.o
  *
  * Diese Funktion setzt das Flag S_HIDE in den Symbolflags
  */
@@ -387,7 +387,7 @@ void ShowSymbolList( void )
    {
       char *name;
 
-      // Flag löschen
+      // Flag lï¿½schen
       sl->s_flags &= ~S_HIDE;
 
       // Unmangler verwenden, wenn definiert
@@ -441,7 +441,7 @@ void ShowSymbolList( void )
    THE_BASE.pb_display = TxtPutLine( THE_BASE.pb_display, NULL );
 
 
-   /* Text in ProfileBase einhängen und darstellen
+   /* Text in ProfileBase einhï¿½ngen und darstellen
     * wenn kein Fehler aufgetreten ist und die Zahl
     * der Zeilen nicht 0 ist
     */

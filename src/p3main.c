@@ -3,7 +3,7 @@
  *
  *  $Revision: 1.1.1.1 $ $Date: 2002/05/31 23:15:43 $
  *
- *  © 1992-94 Michael G. Binz
+ *  ï¿½ 1992-94 Michael G. Binz
  */
 
 #include <stdio.h>
@@ -23,11 +23,11 @@
 #include <clib/dos_protos.h>
 #include <clib/icon_protos.h>
 
-#include <pragmas/asl_lib.h>
-#include <pragmas/dos_lib.h>
-#include <pragmas/intuition_lib.h>
-#include <pragmas/exec_lib.h>
-#include <pragmas/icon_lib.h>
+#include <pragma/asl_lib.h>
+#include <pragma/dos_lib.h>
+#include <pragma/intuition_lib.h>
+#include <pragma/exec_lib.h>
+#include <pragma/icon_lib.h>
 
 #include "version.h"
 #include "pro.h"
@@ -39,7 +39,7 @@
 #define MIN_REXX_VER    36
 #define MIN_AGUIDE_VER  0
 
-#define STX_LEFT        0   /* Konfigurierbar über WINDIM Tooltype */
+#define STX_LEFT        0   /* Konfigurierbar ï¿½ber WINDIM Tooltype */
 #define STX_TOP         0
 #define STX_WIDTH       640
 #define STX_HEIGHT      200
@@ -65,9 +65,9 @@ struct ProfileBase THE_BASE;
 
 /* exit_wrong_libraries
  *
- * Erledigt Programmabbruch für den Fall, daß AProf unter
+ * Erledigt Programmabbruch fï¿½r den Fall, daï¿½ AProf unter
  * einer BS Version < 2.04 gestartet wurde oder wichtige
- * Libraries nicht geöffnet werden konnten.
+ * Libraries nicht geï¿½ffnet werden konnten.
  *
  * Diese Funktion zeigt unter allen BS Versionen einen
  * Requester mit einer Fehlermeldung an. Sollte
@@ -103,7 +103,7 @@ static void exit_wrong_libraries( void )
 
 /* CloseLibs
  *
- * Schliessen aller geöffneten Libraries.
+ * Schliessen aller geï¿½ffneten Libraries.
  */
 static void CloseLibs( void )
 {
@@ -162,16 +162,16 @@ static BOOL OpenLibs( void )
       return TRUE;
 
    /* Die folgenden Bibliotheken verursachen keinen Abbruch mehr,
-    * wenn sie nicht geöffnet werden können
+    * wenn sie nicht geï¿½ffnet werden kï¿½nnen
     */
 
-   // Optionale Bibliothek für Hilfesystem
+   // Optionale Bibliothek fï¿½r Hilfesystem
    if ( NULL == ( AmigaGuideBase = OpenLibrary( "amigaguide.library", MIN_AGUIDE_VER ) ) )
    {
       extern struct NewMenu stx_newmenu[];
       struct NewMenu *nm = stx_newmenu;
 
-      // Spricht ein Menüeintrag die Hilfefunktion an?
+      // Spricht ein Menï¿½eintrag die Hilfefunktion an?
       while ( nm->nm_Type != NM_END && nm->nm_UserData != men_help )
          nm++;
 
@@ -195,8 +195,8 @@ static BOOL OpenLibs( void )
 
 /* extract_name
  *
- * Wurde eine Datei über Kommandozeile, DefaultTool oder ExtendedSelect
- * gewählt, dann erfolgt Rückgabe von Zeiger auf den Namen sonst NULL
+ * Wurde eine Datei ï¿½ber Kommandozeile, DefaultTool oder ExtendedSelect
+ * gewï¿½hlt, dann erfolgt Rï¿½ckgabe von Zeiger auf den Namen sonst NULL
  */
 static char *extract_name( int c, char *v[] )
 {
@@ -205,7 +205,7 @@ static char *extract_name( int c, char *v[] )
    if ( c )                        // CLI
    {
       /* Nur erste Datei auf Kommandozeile!
-       * argv[1] kann nur gültig oder NULL sein
+       * argv[1] kann nur gï¿½ltig oder NULL sein
        */
       return v[1];
    }
@@ -220,12 +220,12 @@ static char *extract_name( int c, char *v[] )
 
       if ( wbst->sm_NumArgs > 1 )
       {
-         // Überspringe Argumente solange nicht wa_Lock und wa_Name
+         // ï¿½berspringe Argumente solange nicht wa_Lock und wa_Name
          // belegt sind
          for ( curarg = 1 ;
             (curarg < wbst->sm_NumArgs) && !wbag[curarg].wa_Lock && !wbag[curarg].wa_Name;
             ++curarg )
-            ; // Gültiges Argument suchen
+            ; // Gï¿½ltiges Argument suchen
 
          if ( curarg < wbst->sm_NumArgs )
          {
@@ -445,7 +445,7 @@ void p3err( const char *fmt, ... )
 #ifdef SIM_CLI
 /* DestroyCli
  *
- * Gibt Cli-Struktur frei. Wird von atexit ausgeführt.
+ * Gibt Cli-Struktur frei. Wird von atexit ausgefï¿½hrt.
  */
 static void DestroyCli( void )
 {
@@ -495,7 +495,7 @@ BOOL CreateCli( void )
       Forbid();
          p = (struct Process *)FindTask( NULL );
 
-         /* Cli-Struktur in Process-Struktur hängen */
+         /* Cli-Struktur in Process-Struktur hï¿½ngen */
          p->pr_CLI = MKBADDR( cli );
 
          /* Freien CLI-Slot suchen ... */
@@ -512,7 +512,7 @@ BOOL CreateCli( void )
          }
       Permit();
 
-      /* TODO: Bei CON: sollte zumindest ein Name für
+      /* TODO: Bei CON: sollte zumindest ein Name fï¿½r
        * die Console angegeben werden.
        */
       if ( !Output() && !Input()
@@ -556,26 +556,26 @@ void pro_debug( void )
 
 int main( int argc, char *argv[] )
 {
-#ifdef MCH_AMIGA
-   extern int Enable_Abort;
-#endif
+// #ifdef MCH_AMIGA
+//    extern int Enable_Abort;
+// #endif
    int stx_win_hi, stx_win_wi, stx_win_lf, stx_win_tp;
    char *fname;
    extern struct NewMenu stx_newmenu[];
 
 
-#ifdef MCH_AMIGA
-   Enable_Abort = 0;
-#endif
+// #ifdef MCH_AMIGA
+//    Enable_Abort = 0;
+// #endif
 
-   // Destruktor für Libraries
+   // Destruktor fï¿½r Libraries
    atexit( CloseLibs );
 
-   // Libraries öffnen
+   // Libraries ï¿½ffnen
    if ( OpenLibs() )
       exit_wrong_libraries();
 
-   // Fenstergröße aus Icon lesen
+   // Fenstergrï¿½ï¿½e aus Icon lesen
    getwindim( &stx_win_hi, &stx_win_wi, &stx_win_lf, &stx_win_tp );
       stx_win_hi = Max( stx_win_hi, STX_HEIGHT );
       stx_win_wi = Max( stx_win_wi, STX_WIDTH );
@@ -590,7 +590,7 @@ int main( int argc, char *argv[] )
       CreateCli();
 #endif
 
-   // Fenster öffnen
+   // Fenster ï¿½ffnen
    if ( !DspInit( stx_win_lf, stx_win_tp, stx_win_wi, stx_win_hi, stx_newmenu, p3IDCMPHandler ) )
       return RETURN_FAIL;
    else
@@ -601,7 +601,7 @@ int main( int argc, char *argv[] )
    InitGadgets( DspGetWindow(), DspGetVisInfo() );
 
    // Copyright als Fenstertitel
-   DspSetWindowTitle( APP_NAME "  Version " APP_VERSION  " © 1993,94 Michael G. Binz" );
+   DspSetWindowTitle( APP_NAME "  Version " APP_VERSION  " ï¿½ 1993,94 Michael G. Binz" );
 
    // Wenn Dateiname ermittelt werden kann, dann laden, sonst Request
    if ( fname = extract_name( argc, argv ) )
@@ -628,7 +628,7 @@ int main( int argc, char *argv[] )
 
 /* wbmain
  *
- * Einsprung für Start von der Workbench für
+ * Einsprung fï¿½r Start von der Workbench fï¿½r
  * Maxon C++
  */
 #ifdef __MAXON__
